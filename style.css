@@ -9,6 +9,28 @@ html {
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #cf1515;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.5s, transform 0.3s;
+  opacity: 20%;
+}
+
+.scroll-to-top:hover {
+  background-color: #cf1515;
+  transform: scale(1.2);
+  opacity: 100%;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -78,6 +100,7 @@ main {
   display: flex;
   justify-content: space-between;
   background-color: #f6dfdf;
+  height: 100vh;
 }
 
 .content {
@@ -144,8 +167,9 @@ main {
 
 .About {
   display: flex;
-  position: relative;
-  top: 142.5px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 .About-content {
   margin-left: 100px;
@@ -156,7 +180,7 @@ main {
   padding: 5px;
   border-radius: 10px;
   width: 160px;
-  height: 50px;
+  height: 52px;
   color: rgb(255, 255, 255);
   border: 3px solid rgb(86, 86, 147);
   background-image: linear-gradient(to right, white 50%, rgb(86, 86, 147) 50%);
@@ -186,6 +210,7 @@ main {
   position: relative;
   top: 142.5px;
   margin-bottom: 10px;
+  /* height: 100vh; */
 }
 .child1 {
   background-color: #f6dfdf;
@@ -255,6 +280,10 @@ main {
   margin: 30px 100px 10px 0px;
 }
 
+/* .Involved {
+  height: 100vh;
+} */
+
 .Parent1 {
   display: flex;
   margin: 200px 50px -100px 100px;
@@ -317,9 +346,10 @@ main {
   display: flex;
 }
 .imgs div:nth-child(1) {
-  background-color: #bebcbb;
+  background-color: #e86a38;
+  color: white;
 }
-/* .imgs div:nth-child(1)::after {
+.imgs div:nth-child(1)::after {
   content: "";
   position: absolute;
   top: 98%;
@@ -327,7 +357,7 @@ main {
   width: 60px;
   height: 30px;
   background-color: #e86a38;
-} */
+}
 .imgs div:nth-child(2) {
   background-color: #d4cfcc;
 }
@@ -427,9 +457,17 @@ main {
   height: 100%;
 }
 
+.Donation {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .Donation-main {
   display: flex;
-  margin: 100px 100px 0px 100px;
+  margin: 0px 100px 0px 100px;
 }
 
 .Donation-description h1 {
@@ -495,9 +533,12 @@ main {
 }
 
 .Team {
-  /* margin: 100px 100px 0px 100px; */
-  margin-top: 100px;
+  height: 100vh;
   background-color: #f6dfdf;
+}
+
+.Team-top span {
+  padding-top: 50px;
 }
 .Team-top span,
 p {
@@ -517,6 +558,7 @@ p {
    background-color: white; 
    border-radius: 12px;
 } */
+
 .cards img {
   width: 300px;
   height: 350px;
@@ -544,10 +586,11 @@ p {
   width: 40px;
   height: 40px;
   margin-right: 15px;
+  transition: 1.2s;
 }
 
 .content a img:hover {
-  transform: translateY(-6px) rotateZ(360deg);
+  transform: translateY(-15px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
 }
 .content img:active {
@@ -556,7 +599,10 @@ p {
 }
 
 .Review {
-  margin-top: 100px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Review-bottom {
@@ -609,11 +655,7 @@ p {
 }
 
 .signup-background img {
-  /* position: absolute; */
-  height: 100%;
-  width: 100%;
-  margin-top: 100px;
-  /* opacity: 50%; */
+  height: 100vh;
 }
 .signup-background {
   margin-bottom: -4px;
@@ -625,7 +667,6 @@ p {
   justify-content: center;
   align-items: center;
   margin: -550px 100px 0px 100px;
-  /* background-color: rgba(255, 255, 255, 0.8); */
 }
 
 .signup-content button {
@@ -710,10 +751,11 @@ p {
   height: 30px;
   border-radius: 50%;
   margin-top: 10px;
+  transition: 1.2s;
 }
 
 .contact-socials img:hover {
-  transform: translateY(-6px) rotateZ(360deg);
+  transform: translateY(-10px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
 }
 
@@ -734,10 +776,11 @@ p {
   margin-bottom: 40px;
 }
 
-.contact-links span {
+.contact-links a {
   margin-bottom: 25px;
+  text-decoration: none;
 }
-.contact-links span {
+.contact-links a {
   display: flex;
   flex-direction: row;
   color: rgb(220, 220, 220);
