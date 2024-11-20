@@ -8,6 +8,7 @@ html {
 }
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
 }
 
 
@@ -498,6 +499,7 @@ main {
   border-radius: 20px;
   box-shadow: 12px 12px 0px rgba(127, 178, 237, 0.9);
 }
+.donation2 button:nth-child(2),
 .Donation-description button:nth-child(3) {
   font-size: 18px;
   font-weight: 900;
@@ -513,14 +515,14 @@ main {
   background-position: right bottom;
   transition: background-position 0.5s ease, color 0.5s ease;
 }
-
+.donation2  button:nth-child(2):hover,
 .Donation-description button:nth-child(3):hover {
   cursor: pointer;
   background-position: left bottom;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-
+.donation2 button:nth-child(3),
 .Donation-description button:nth-child(4) {
   font-size: 18px;
   font-weight: 900;
@@ -536,6 +538,7 @@ main {
   background-position: right bottom;
   transition: background-position 0.5s ease, color 0.5s ease;
 }
+.donation2 button:nth-child(3):hover,
 .Donation-description button:nth-child(4):hover {
   cursor: pointer;
   background-position: left bottom;

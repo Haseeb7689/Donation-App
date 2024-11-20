@@ -1,9 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 #donation{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: url("img/donation.jpg") no-repeat;
+    padding: 20px;
+    margin-top: 20px;
+}
+#Banner{
+    display: flex;
+    height: 50vh;
+    width: 100vw;
+    background: url('./img/Donationpg.png');
     background-size: cover;
     background-position: center;
+    justify-content: center;
+    align-items: center;
+}
+.donation_Block{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+}
+.donation1{
+    width: 40%;
+    text-align: left;
+padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+}
+.donation1 h1{
+    font-family: Montserrat;
+    line-height: 1.5;
+    padding-left: 30px;
+    font-size: 50px;
+}
+.donation1 span{
+    color: #e70707;
+    font-size: 60px;
+    font-weight: 800;
+}
+.donation2{
+    padding: 10px;
+    width: 60%;
+
+}
+.donation2 p{
+    font-size: 20px;
+    line-height: 2;
+    font-family: Montserrat;
+    padding: 10px;
+    font-weight: 500;
+}
+#donate-link{
+    text-decoration: none;
+    color: rgb(252, 252, 252);
+    transition: 0.3s ease-in;
+}
+#donate-link:hover{
+    color: white;
+    transition: 0.3s ease-in;
 }
