@@ -20,7 +20,7 @@
                     </form>
                     
                     <a href="#">Forgot Password</a><br>
-                    <a href="/signup.php">Don't have an account? Register</a>
+                    <a href="#">Don't have an account? Register</a>
                 </div>
             </div>
         </div>
