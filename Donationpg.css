@@ -78,7 +78,7 @@ padding: 10px;
 }
 .Payment{
     width: 60%;
-    display: flex;
+    display: none;
     justify-content: space-between;
     flex-direction: column;
     border: solid;
@@ -90,7 +90,7 @@ padding: 10px;
 .donation{
     
     width: 60%;
-    display: none;
+    display: flex;
 
     justify-content: space-between;
     flex-direction: column;
@@ -355,3 +355,279 @@ transform: scale(0.6);
     background-color: rgb(6, 68, 182);
     color: white;
 }
+.details{
+    width: 60%;
+    display: none;
+    justify-content: space-between;
+    flex-direction: column;
+    border: solid;
+    border-image: linear-gradient(180deg, #aaaaaa, white,#ffffff,#aaaaaa) 1;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.Payment-details{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+        margin: 10px;
+        margin-top: 30px;
+}
+.name{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    margin-left: 35px;
+}
+.main-info{
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    margin-left: 18px;
+}
+.form-group input{
+    width: 95%;
+    height: 40px;
+    padding: 10px;
+  margin: 10px 0px 10px 0px;
+    border: 2px solid cornflowerblue;
+    /* cursor: pointer; */
+    transition: 0.3s ease-in;
+    background: transparent;
+    font-size: large;
+}
+.form-group label{
+    font-size: 20px;
+    margin-top: 30px;
+}
+.form-group1-3 input,
+.form-group1-2 input,
+.form-group1 input{
+    width: 95%;
+    height: 40px;
+    padding: 10px;
+  margin: 10px 0px 10px 0px;
+    border: 2px solid cornflowerblue;
+    /* cursor: pointer; */
+    transition: 0.3s ease-in;
+    background: transparent;
+    font-size: large;
+}
+.form-group1-3 label,
+.form-group1-2 label,
+.form-group1 label{
+    font-size: 20px;
+    margin-top: 30px;
+}
+.form-group{
+    width: 50%;
+
+}
+.form-group1-2{
+    width: 20%;
+}
+.form-group1{
+    width: 45%;
+}
+.form-group1-3{
+    width: 25%;
+}
+.submit1{
+
+    padding: 20px;
+}
+.submit1 button{
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: 2px solid cornflowerblue;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+    background: transparent;
+    font-size: large;
+}
+.submit1 button:hover{
+    border: 2px solid rgb(58, 60, 63);
+    transition: 0.3s ease-in;
+    background-color: rgb(6, 68, 182);
+    color: white;
+}
+.wallet,
+.Bank {
+    margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.wallet h1,
+.Bank h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.wallet p,
+.Bank p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.wallet-address,
+.Bank-address {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.wallet-address p,
+.Bank-address p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.wallet-address button,
+.Bank button {
+  display: inline-block;
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wallet-address button:hover,
+.Bank button:hover {
+  background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feedback {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+.onlineDetails {
+    width: 60%;
+    display: none;
+    justify-content: space-between;
+    flex-direction: column;
+    border: solid;
+    border-image: linear-gradient(180deg, #aaaaaa, white,#ffffff,#aaaaaa) 1;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .wrapper{
+    
+    display: none; /* Initially hidden */
+    position: fixed; /* Makes it cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    z-index: 1000; 
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 89;
+  }
+  .container img{
+    width: 200px;
+    position: relative;
+    z-index: 90;
+    height: 200px;
+  }
+/* From Uiverse.io by Yaya12085 */ 
+.custum-file-upload {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cacaca;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  }
+  
+  .custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custum-file-upload .icon svg {
+    height: 80px;
+    fill: rgba(75, 85, 99, 1);
+  }
+  
+  .custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custum-file-upload .text span {
+    font-weight: 400;
+    color: rgba(75, 85, 99, 1);
+  }
+  
+  .custum-file-upload input {
+    display: none;
+  }
+  .note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+  }
+  .File-upload {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    margin-bottom: 20px;
+  }
+
+  .File-upload h1 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+  }
