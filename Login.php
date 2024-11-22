@@ -13,14 +13,14 @@
             <div class="card">
                 <h1>Login</h1>
                 <div class="card-body">
-                    <form action="/Donation.html" ">
+                    <form action="/Donation.php" ">
                         <input type="email" placeholder="Email" required><br>
                         <input type="password" placeholder="Password" required><br>
                         <button >Login</button>
                     </form>
                     
                     <a href="#">Forgot Password</a><br>
-                    <a href="#">Don't have an account? Register</a>
+                    <a href="/signup.php">Don't have an account? Register</a>
                 </div>
             </div>
         </div>
@@ -31,10 +31,10 @@
             <div class="text">
                <h1> Not Ready for donation yet?</h1>
                <br>
-               <a href="./index.html">Back to Home</a>
+               <a href="./index.php">Back to Home</a>
                <br>
                <br>
-               <a href="./index.html">Become a Volunteer</a>
+               <a href="./index.php">Become a Volunteer</a>
             </div>
         </div>
     </section>

@@ -1,8 +1,8 @@
 function Navigate(){
-    window.location='Login.html';
+    window.location='Login.php';
 }
 function NavigatetoShop(){
-    window.location='Shop.html';
+    window.location='Shop.php';
 }
 // change the donation to the screen where it is going to donate
 function Navigate1(){
