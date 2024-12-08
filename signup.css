@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* From Uiverse.io by mi-series */ 
 .container {
     display: flex;
@@ -8,6 +10,7 @@
   }
 body{
     margin: 0;
+    font-family: Montserrat;
 }
   .form_area {
     display: flex;

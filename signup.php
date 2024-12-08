@@ -1,42 +1,74 @@
+
+
+
+<?php
+require "config.php";
+
+
+if(isset($_POST['submit'])) {
+if ($_POST['name']==" " || $_POST['email']==" " || $_POST['password']==" ") {
+    echo "<script>alert('Please fill out all fields.')</script>";
+    echo "<script>window.location='/signup.php'</script>";
+} else {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    //hash the password
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO register (name, email, password) VALUES ('$name', '$email', '$password')";
+    $result = $connection->query($sql);
+
+    if ($result) {
+        echo "<script>alert('Registration successful.')</script>";
+        echo "<script>window.location='/Login.php'</script>";
+    } else {
+        echo "<script>alert('Registration failed.')</script>";
+        echo "<script>window.location='/signup.php'</script>";
+    }
+}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Sign Up</title>
     <link rel="icon" href="img/logo.png" sizes="48x48" type="image/x-icon" />
     <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-    
     <section id="signup">
-<div class="container">
-    <div class="form_area">
-        <p class="title">SIGN UP</p>
-        <form action="">
-            <div class="form_group">
-                <label class="sub_title" for="name">Name</label>
-                <input placeholder="Enter your full name" class="form_style" type="text">
+        <div class="container">
+            <div class="signup-section">
+                <!-- Left Side: Form -->
+                <div class="form_area">
+                    <p class="title">Sign Up to Heartly</p>
+                    <form action="signup.php" method="post" name="form">
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Name</label>
+                            <input placeholder="Enter your full name" class="form_style" type="text" id="name" name="name">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="email">Email</label>
+                            <input placeholder="Enter your email" id="email" class="form_style" type="email" name="email">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="password">Password</label>
+                            <input placeholder="Enter your password" id="password" class="form_style" type="password" name="password">
+                        </div>
+                        <button class="btn" type="submit" name="submit">Sign Up</button>
+                        <p>Have an account? <a class="link" href="/Login.php">Login Here!</a></p>
+                    </form>
+                </div>
+                
+                <!-- Right Side: Banner -->
+                
             </div>
-            <div class="form_group">
-                <label class="sub_title" for="email">Email</label>
-                <input placeholder="Enter your email" id="email" class="form_style" type="email">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="password">Password</label>
-                <input placeholder="Enter your password" id="password" class="form_style" type="password">
-            </div>
-            <div>
-                <button class="btn">SIGN UP</button>
-                <p>Have an Account? <a class="link" href="/Login.php">Login Here!</a></p><a class="link" href="">
-            </a></div><a class="link" href="">
-        
-    </a></form></div><a class="link" href="">
-</a></div>
-</section>
+        </div>
+    </section>
+    <script src="index.js"></script>
 </body>
 </html>
-
-
-<?php
-?>

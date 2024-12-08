@@ -353,28 +353,6 @@ main {
 .imgs {
   display: flex;
 }
-.imgs div:nth-child(1) {
-  background-color:  #e7e3e1;
-  /* color: white; */
-}
-/* .imgs div:nth-child(1)::after {
-  content: "";
-  position: absolute;
-  top: 98%;
-  left: 40%;
-  width: 60px;
-  height: 30px;
-  background-color: #e86a38;
-} */
-.imgs div:nth-child(2) {
-  background-color: #d4cfcc;
-}
-.imgs div:nth-child(3) {
-  background-color: #dddad9;
-}
-.imgs div:nth-child(4) {
-  background-color: #f1f0f0;
-}
 
 .p2-img {
   display: flex;
@@ -383,6 +361,26 @@ main {
   padding: 40px 70px;
   cursor: pointer;
   position: relative;
+}
+.p2-img:nth-child(1) {
+  background-color: #c6c6c6;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.p2-img:nth-child(2) {
+  background-color: #dddcdc;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.p2-img:nth-child(3) {
+  background-color: #c6c6c6;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.p2-img:nth-child(4) {
+  background-color: #dddcdc;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .p2-img:hover::after {
@@ -415,6 +413,7 @@ main {
 .p2-bottom-detail {
   display: flex;
   background-color: #13a09d;
+  height: 626px;
 }
 .p2b-description {
   background-color: #e86a38;
@@ -446,6 +445,7 @@ main {
   background-size: 200% 100%;
   background-position: right bottom;
   transition: background-position 0.5s ease, color 0.5s ease;
+  margin: 20px;
 }
 .p2b-description button:hover {
   cursor: pointer;
@@ -461,8 +461,9 @@ main {
   margin: 50px 110.5px 110.5px 0px;
 }
 .p2b-image img {
-  width: 100%;
+  width: 590px;
   height: 100%;
+  object-fit: cover;
 }
 
 .Donation {
@@ -479,6 +480,11 @@ main {
   justify-content: space-around;
   width: 90%;
 
+}
+.p2-img.active{
+  background-color: #e86a38;
+  color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .Donation-description h1 {

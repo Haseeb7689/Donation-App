@@ -54,6 +54,9 @@
     </div>
   </nav>
   <section id="Banner">
+    <div class="banner">
+      
+    </div>
   </section>
   <section id="donation">
     <div class="donation_Block">
@@ -84,15 +87,15 @@
       </div>
       <div class="MyDonation">
         <div class="Mode">
-          <button>One Time</button>
-          <button>Monthly</button>
+          <button onclick="OneTime();" id="OneTime">One Time</button>
+          <button onclick="Monthly(); " id="Monthly">Monthly</button>
         </div>
         <div class="amount">
-          <button value="100" >100$</button>
-          <button value="75">75$</button>
-          <button  value="50">50$</button>
-          <button  value="25">25$</button>
-          <input type="number" placeholder="Other amount" id="amount" name="amount" />
+          <button value="100" id="100$" onclick="amount();">100$</button>
+          <button value="75"  id="75$" onclick="amount1();">75$</button>
+          <button  value="50" id="50$" onclick="amount2();">50$</button>
+          <button  value="25" id="25$" onclick="amount3();">25$</button>
+          <input type="number" id="other" placeholder="Other amount" id="amount" name="amount" onchange="amount4();"/>
         </div>
         <label>Note: 10$ is the minimum for online donation</label>
       </div>

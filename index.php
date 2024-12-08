@@ -1,3 +1,9 @@
+<?php
+session_start();  // Start the session to access session variables
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,10 +55,16 @@
             </li>
           </ul>
         </div>
-
-        <div class="nav-button">
-          <button onclick="Navigate()">Donation Now</button>
-        </div>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+      <div class="nav-button">
+        <button onclick="Navigate('user.php')">Dashboard</button>
+      </div>
+    <?php else: ?>
+      <div class="nav-button">
+        <button onclick="Navigate('donate')">Donation Now</button>
+      </div>
+    <?php endif; ?>
+    
       </div>
     </nav>
 
@@ -291,50 +303,63 @@
         </div>
         <br /><br />
         <div class="Parent2-bottom">
-          <div class="imgs">
-            <div class="p2-img">
-              <img src="img/volunter.jpg" alt="" />
-              <span>Become a Volunter</span>
-            </div>
-            <div class="p2-img" id="b2">
-              <img src="img/advisory.jpg" alt="" />
-              <span>Join Our Advisory Board</span>
-            </div>
-            <div class="p2-img" id="b3">
-              <img src="img/school.jpg" alt="" />
-              <span>Start A School Club</span>
-            </div>
-            <div class="p2-img" id="b4">
-              <img src="img/partner.jpg" alt="" />
-              <span>Partner With Us</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="p2-bottom-detail">
-        <div class="p2b-description">
-          <h1 id="h1">Become a Volunteer</h1>
-          <p id="p1">
-            Volunteering with Global Hygiene Initiative offers a unique
-            opportunity to make a lasting impact in your community and beyond.
-            As a volunteer, you'll play an essential role in helping us deliver
-            resources, organize events, and provide support to those in need.
-            Whether you're passionate about education, community outreach, or
-            health initiatives, there's a place for you in our mission.
-          </p>
-          <button>
-            View Details
-            <img
-             id="img-1"
-              src="icons/arrow-right-solid.svg"
-              alt=""
-              style="width: 16px; height: 16px; padding-top: 2px"
-            />
-          </button>
-        </div>
-        <div class="p2b-image">
-          <img src="img/volunter.jpg" alt="" />
-        </div>
+  <div class="imgs">
+    <div
+      class="p2-img"
+      onclick="change('Become a Volunteer', 'Volunteering with Global Hygiene Initiative offers a unique opportunity to make a lasting impact in your community and beyond. As a volunteer, you will play an essential role in helping us deliver resources, organize events, and provide support to those in need.', 'img/volunter.jpg', this)"
+    >
+      <img src="img/volunter.jpg" alt="" />
+      <span>Become a Volunteer</span>
+    </div>
+    <div
+      class="p2-img"
+      onclick="change('Join Our Advisory Board', 'Joining our advisory board allows you to contribute strategically to the mission of the Global Hygiene Initiative. Help us shape the future of charitable giving while working alongside other industry experts.', 'img/advisory.jpg', this)"
+    >
+      <img src="img/advisory.jpg" alt="" />
+      <span>Join Our Advisory Board</span>
+    </div>
+    <div
+      class="p2-img"
+      onclick="change('Start A School Club', 'Start a school club to promote hygiene awareness and community building. This initiative empowers students to lead meaningful projects and bring change to their peers.', 'img/school.jpg', this)"
+    >
+      <img src="img/school.jpg" alt="" />
+      <span>Start A School Club</span>
+    </div>
+    <div
+      class="p2-img"
+      onclick="change('Partner With Us', 'Partnering with us opens opportunities to create impactful campaigns and extend our reach to more communities. Together, we can drive sustainable change.', 'img/partner.jpg', this)"
+    >
+      <img src="img/partner.jpg" alt="" />
+      <span>Partner With Us</span>
+    </div>
+  </div>
+</div>
+
+  <div class="p2-bottom-detail">
+    <div class="p2b-description">
+      <h1 id="h1">Become a Volunteer</h1>
+      <p id="p1">
+        Volunteering with Global Hygiene Initiative offers a unique opportunity
+        to make a lasting impact in your community and beyond. As a volunteer,
+        you'll play an essential role in helping us deliver resources, organize
+        events, and provide support to those in need. Whether you're passionate
+        about education, community outreach, or health initiatives, there's a
+        place for you in our mission.
+      </p>
+      <button>
+        View Details
+        <img
+          id="img-1"
+          src="icons/arrow-right-solid.svg"
+          alt=""
+          style="width: 16px; height: 16px; padding-top: 2px"
+        />
+      </button>
+    </div>
+    <div class="p2b-image">
+      <img id="detail-img" src="img/volunter.jpg" alt="" />
+    </div>
+  </div>
       </div>
     </section>
 
@@ -649,4 +674,15 @@
     /></a>
   </body>
   <script src="index.js"></script>
+  <script>
+  function Navigate(action) {
+    if (action === 'logout') {
+      // Perform logout logic, maybe redirect to a logout handler or destroy session
+      window.location.href = 'logout.php'; // Replace with your logout page
+    } else if (action === 'donate') {
+      // Navigate to donation page
+      window.location.href = 'login.php'; // Replace with your donation page
+    }
+  }
+</script>
 </html>
