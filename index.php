@@ -57,7 +57,7 @@ session_start();  // Start the session to access session variables
         </div>
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
       <div class="nav-button">
-        <button onclick="Navigate('user.php')">Dashboard</button>
+        <button onclick="window.location.href = '/user.php'">Dashboard</button>
       </div>
     <?php else: ?>
       <div class="nav-button">

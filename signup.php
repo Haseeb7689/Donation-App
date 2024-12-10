@@ -1,35 +1,42 @@
-
-
-
 <?php
 require "config.php";
+session_start(); // Start the session to store session variables
 
-
-if(isset($_POST['submit'])) {
-if ($_POST['name']==" " || $_POST['email']==" " || $_POST['password']==" ") {
-    echo "<script>alert('Please fill out all fields.')</script>";
-    echo "<script>window.location='/signup.php'</script>";
-} else {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    //hash the password
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
-    $sql = "INSERT INTO register (name, email, password) VALUES ('$name', '$email', '$password')";
-    $result = $connection->query($sql);
-
-    if ($result) {
-        echo "<script>alert('Registration successful.')</script>";
-        echo "<script>window.location='/Login.php'</script>";
-    } else {
-        echo "<script>alert('Registration failed.')</script>";
+if (isset($_POST['submit'])) {
+    if ($_POST['name'] == " " || $_POST['email'] == " " || $_POST['password'] == " ") {
+        echo "<script>alert('Please fill out all fields.')</script>";
         echo "<script>window.location='/signup.php'</script>";
+    } else {
+        $id = uniqid();
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $role = '18d5ae25-95c4-4336-8637-9ba71b622190';
+        
+        // Hash the password
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert user into the database
+        $sql = "INSERT INTO register (id, name, email, password, role) VALUES ('$id', '$name', '$email', '$password', '$role')";
+        $result = $connection->query($sql);
+
+        if ($result) {
+            // Set session variables after successful registration
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email;
+            $_SESSION['name'] = $name;
+            $_SESSION['role'] = $role;
+
+            echo "<script>alert('Registration successful.')</script>";
+            echo "<script>window.location='/user.php'</script>"; // Redirect to profile page (or any other page)
+        } else {
+            echo "<script>alert('Registration failed.')</script>";
+            echo "<script>window.location='/signup.php'</script>";
+        }
     }
 }
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,49 +1,46 @@
 <?php
- require "config.php"; 
+session_start(); // Start the session at the beginning of the script
+require "config.php"; 
 
- if (isset($_POST['login'])){
-    if($_POST['email'] == '' || $_POST['password'] == ''){
-       echo "<script>Alert('Please fill out all fields')</script>";
-    }
-
+if (isset($_POST['login'])) {
+    if ($_POST['email'] == '' || $_POST['password'] == '') {
+        echo "<script>alert('Please fill out all fields')</script>";
+    } else {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         $stm = $connection->prepare("SELECT * FROM register WHERE email = :email");
-        
+
         // Bind the email parameter
         $stm->bindValue(':email', $email, PDO::PARAM_STR);
         $stm->execute();
         $user = $stm->fetch(PDO::FETCH_ASSOC);
-        
-        if ($user){
-            if(password_verify($password, $user['password'])){
-                session_start();
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['loggedin']=true;
+
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                // Set session variables after successful login
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $email;
+                $_SESSION['name'] = $user['Name']; // Set user's name
+                $_SESSION['role'] = $user['role']; // Set user's role
+
                 echo '<script>alert("Login Successful")</script>';
                 echo '<script>window.location.href="user.php"</script>';
                 exit;
+            } else {
+                echo '<script>alert("Password does not match")</script>';
+                echo '<script>window.location.href="login.php"</script>';
+                exit;
             }
-        else{
-            echo '<script>alert("Password does not match")</script>';
-            echo '<script>window.location.href="login.php"</script>';
-            exit;
-        }
-          
-        }
-        else{
+        } else {
             echo '<script>alert("Login Failed")</script>';
             echo '<script>window.location.href="login.php"</script>';
             exit;
         }
     }
-
-
-
-
-
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

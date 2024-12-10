@@ -211,3 +211,30 @@ function change(title, description, imageSrc,element) {
     // Update image source
     document.getElementById("detail-img").src = imageSrc;
   }
+
+
+
+//   FOR the User Profile area**************
+//********************************************* */
+// USer Profile
+const Edit_info= document.getElementById('hidden1');
+  const Edit_About = document.getElementById('hidden');
+function about_show(){
+if (Edit_About.style.display === 'none') {
+    Edit_About.style.display = 'block';
+  } else {
+    Edit_About.style.display = 'none';
+  }
+}
+function info_show(){
+if (Edit_info.style.display === 'none') {
+    Edit_info.style.display = 'block';
+  } else {
+    Edit_info.style.display = 'none';
+  }
+}
+function Changeinfo()
+{
+
+    
+}
