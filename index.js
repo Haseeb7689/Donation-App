@@ -211,7 +211,14 @@ function change(title, description, imageSrc,element) {
     // Update image source
     document.getElementById("detail-img").src = imageSrc;
   }
-
+  function updateFileName() {
+    const fileInput = document.getElementById('file');
+    const fileNameSpan = document.getElementById('fileName');
+    if (fileInput.files.length > 0) {
+      const fileName = fileInput.files[0].name; // Get the uploaded file name
+      fileNameSpan.textContent = fileName; // Display the file name
+    }
+  }
 
 
 //   FOR the User Profile area**************
@@ -219,6 +226,15 @@ function change(title, description, imageSrc,element) {
 // USer Profile
 const Edit_info= document.getElementById('hidden1');
   const Edit_About = document.getElementById('hidden');
+  var inp_occupation1= document.getElementById('occupation').value;
+  var inp_location1= document.getElementById('Location').value;
+  var inp_bio1= document.getElementById('bio').value;
+  
+
+  // User contact
+  var phone= document.getElementById('phone').value;
+  var Website= document.getElementById('website').value;
+  var URL = document.getElementById('URL').value;
 function about_show(){
 if (Edit_About.style.display === 'none') {
     Edit_About.style.display = 'block';
@@ -235,6 +251,95 @@ if (Edit_info.style.display === 'none') {
 }
 function Changeinfo()
 {
-
-    
+    var inp_occupation= document.getElementById('occupation').value;
+    var inp_location= document.getElementById('Location').value;
+    var inp_bio= document.getElementById('bio').value;
+inp_occupation1= inp_occupation;
+inp_location1= inp_location;
+inp_bio1= inp_bio;
+document.getElementById('Occupation').innerHTML = inp_occupation;
+document.getElementById('Location1').innerHTML= inp_location;
+document.getElementById('bio1').innerHTML= inp_bio;
+uploadToLocalstorage();
+close();
 }
+function close(){
+    if (Edit_info.style.display === 'block') {
+        Edit_info.style.display = 'none';       
+      }
+      if (Edit_About.style.display === 'block') {
+        Edit_About.style.display = 'none';       
+      } 
+
+}
+function uploadToLocalstorage(){
+    localStorage.setItem('Occupation', inp_occupation1);
+    localStorage.setItem('Location', inp_location1);
+    localStorage.setItem('bio', inp_bio1);
+}
+function downloadFromLocalstorage(){
+    inp_occupation1= localStorage.getItem('Occupation');
+    inp_location1= localStorage.getItem('Location');
+    inp_bio1= localStorage.getItem('bio');
+    document.getElementById('Occupation').innerHTML = inp_occupation1;
+    document.getElementById('Location1').innerHTML= inp_location1;
+    document.getElementById('bio1').innerHTML= inp_bio1;
+}
+
+
+//User contact
+function ChangeContact() {
+    var phone1 = document.getElementById('phone').value;
+    var Website1 = document.getElementById('website').value;
+    var URL1 = document.getElementById('URL').value;
+
+    phone = phone1;
+    Website = Website1;
+    URL = URL1;
+
+    document.getElementById('phone1').innerHTML = phone1;
+
+    // Update Website and URL to be clickable links
+    document.getElementById('website1').innerHTML = `<a href="${Website1}" target="_blank">${Website1}</a>`;
+    document.getElementById('URL1').innerHTML = `<a href="${URL1}" target="_blank">${URL1}</a>`;
+
+    uploadToLocalstorage1();
+    close1();
+}
+
+function uploadToLocalstorage1() {
+    localStorage.setItem('phone', phone);
+    localStorage.setItem('Website', Website);
+    localStorage.setItem('URL', URL);
+}
+
+function downloadFromLocalstorage1() {
+    phone = localStorage.getItem('phone');
+    Website = localStorage.getItem('Website');
+    URL = localStorage.getItem('URL');
+
+    document.getElementById('phone1').innerHTML = phone;
+
+    // Update Website and URL to be clickable links
+    if (Website) {
+        document.getElementById('website1').innerHTML = `<a href="${Website}" target="_blank">${Website}</a>`;
+    } else {
+        document.getElementById('website1').innerHTML = '';
+    }
+    
+    if (URL) {
+        document.getElementById('URL1').innerHTML = `<a href="${URL}" target="_blank">${URL}</a>`;
+    } else {
+        document.getElementById('URL1').innerHTML = '';
+    }
+}
+
+function close1() {
+    if (Edit_info.style.display === 'block') {
+        Edit_info.style.display = 'none';
+    }
+    if (Edit_About.style.display === 'block') {
+        Edit_About.style.display = 'none';
+    }
+}
+

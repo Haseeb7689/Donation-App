@@ -1,3 +1,10 @@
+<?php
+
+require 'navigation.php';
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,41 +25,7 @@
   </div>
 </div>
 
-  <nav id="nav">
-    <div class="nav">
-      <div class="logo">
-        <img src="img/logo.png" alt="logo" />
-      </div>
-
-      <div class="list">
-        <ul>
-          <li>
-            <a href="/index.php" style="text-decoration: none; color: inherit">Home</a>
-          </li>
-          <li>
-            <a href="#About" style="text-decoration: none; color: inherit">About us</a>
-          </li>
-          <li>
-
-            <a href="#Projects" style="text-decoration: none; color: inherit">Our Projects</a>
-          </li>
-          <li>
-            <a href="#Involved" style="text-decoration: none; color: inherit">Get Involved</a>
-          </li>
-          <li>
-            <a href="#Donation" style="text-decoration: none; color: inherit">Donation</a>
-          </li>
-          <li>
-            <a href="#Contact" style="text-decoration: none; color: inherit">Contact us</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="nav-button">
-        <button onclick="Navigate()">Donation Now</button>
-      </div>
-    </div>
-  </nav>
+ 
   <section id="Banner">
     <div class="banner">
       
@@ -210,21 +183,21 @@
         </div>
       </div>
       <div class="File-upload">
-    <h1>File Upload</h1>
-    <label class="custum-file-upload" for="file">
-      <div class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M10 1C9.735 1 9.48 1.105 9.293 1.293L3.293 7.293C3.105 7.48 3 7.735 3 8V20C3 21.657 4.343 23 6 23H7C7.552 23 8 22.552 8 22C8 21.448 7.552 21 7 21H6C5.448 21 5 20.552 5 20V9H10C10.552 9 11 8.552 11 8V3H18C18.552 3 19 3.448 19 4V9C19 9.552 19.448 10 20 10C20.552 10 21 9.552 21 9V4C21 2.343 19.657 1 18 1H10ZM9 7H6.414L9 4.414V7ZM14 15.5C14 14.119 15.119 13 16.5 13C17.881 13 19 14.119 19 15.5V16V17H20C21.105 17 22 17.895 22 19C22 20.105 21.105 21 20 21H13C11.895 21 11 20.105 11 19C11 17.895 11.895 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.208 12.814 12.016 15.122C10.283 15.561 9 17.131 9 19C9 21.209 10.791 23 13 23H20C22.209 23 24 21.209 24 19C24 17.131 22.718 15.561 20.984 15.122C20.792 12.814 18.858 11 16.5 11Z" />
-        </svg>
-      </div>
-      <div class="text">
-        <span>Click to upload an image</span>
-      </div>
-      <input type="file" id="file" required>
-    </label>
-    <p class="note">Note: Please upload an image file no larger than 5MB.</p><br>
-    <p class="note">Upload the Screenshot of the donation receipt for updates</p>
-  </div>
+  <h1>File Upload</h1>
+  <label class="custum-file-upload" for="file">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 1C9.735 1 9.48 1.105 9.293 1.293L3.293 7.293C3.105 7.48 3 7.735 3 8V20C3 21.657 4.343 23 6 23H7C7.552 23 8 22.552 8 22C8 21.448 7.552 21 7 21H6C5.448 21 5 20.552 5 20V9H10C10.552 9 11 8.552 11 8V3H18C18.552 3 19 3.448 19 4V9C19 9.552 19.448 10 20 10C20.552 10 21 9.552 21 9V4C21 2.343 19.657 1 18 1H10ZM9 7H6.414L9 4.414V7ZM14 15.5C14 14.119 15.119 13 16.5 13C17.881 13 19 14.119 19 15.5V16V17H20C21.105 17 22 17.895 22 19C22 20.105 21.105 21 20 21H13C11.895 21 11 20.105 11 19C11 17.895 11.895 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.208 12.814 12.016 15.122C10.283 15.561 9 17.131 9 19C9 21.209 10.791 23 13 23H20C22.209 23 24 21.209 24 19C24 17.131 22.718 15.561 20.984 15.122C20.792 12.814 18.858 11 16.5 11Z" />
+      </svg>
+    </div>
+    <div class="text">
+      <span id="fileName">Click to upload an image</span>
+    </div>
+    <input type="file" id="file" required onchange="updateFileName()">
+  </label>
+  <p class="note">Note: Please upload an image file no larger than 5MB.</p><br>
+  <p class="note">Upload the Screenshot of the donation receipt for updates</p>
+</div>
   <div class="submit1">
         <button>Submit</button>
         </div>

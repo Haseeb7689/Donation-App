@@ -63,9 +63,9 @@ $userEmail = $_SESSION['email']; // User's email
                         <div class="card-header bg-primary text-white">About</div>
                         <div class="card-body">
                             <p><strong>Name:</strong> <?php echo $_SESSION['name'] ?></p>
-                            <p><strong>Occupation:</strong> Software Engineer</p>
-                            <p><strong>Location:</strong> San Francisco, USA</p>
-                            <p><strong>Bio:</strong> Passionate about technology and innovation.</p>
+                            <p><strong>Occupation:</strong> <span  id="Occupation">Software Engineer</span></p>
+                            <p ><strong>Location:</strong> <span id="Location1"> San Francisco, USA</span></p>
+                            <p><strong>Bio:</strong> <span  id="bio1">Passionate about technology and innovation</span>.</p>
                             <button type="button" class="btn btn-primary" onclick="about_show();">Edit Profile</button>
                         </div>
                     </div>
@@ -107,10 +107,10 @@ $userEmail = $_SESSION['email']; // User's email
                 <button type="button" class="btn btn-primary btn-outline-light float-end" onclick="info_show(); ">Edit</button>
                 </div>
                 <div class="card-body">
-                    <p><strong>Phone:</strong> +1 234 567 890</p>
+                    <p><strong>Phone:</strong> <span id="phone1">+1 234 567 890</span></p>
                     <p><strong>Email: </strong><?php echo $_SESSION['email']; ?></p>
-                    <p><strong>Website:</strong> <a href="https://johndoe.com" target="_blank">johndoe.com</a></p>
-                    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></p>
+                    <p><strong>Website: </strong><span id="website1"><a href="https://johndoe.com" target="_blank">johndoe.com</a></span> </p>
+                    <p><strong>LinkedIn: </strong><span id="URL1"><a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></span> </p>
                     
                 </div>
             </div>
@@ -126,7 +126,7 @@ $userEmail = $_SESSION['email']; // User's email
                     <label for="URL">Url</label>
                     <input id="URL" type="text" placeholder="Linkedin Profile">
                     <br><br>
-                    <button type="button" class="btn btn-primary btn-outline-dark">Save</button>
+                    <button type="button" class="btn btn-primary btn-outline-dark" onclick="ChangeContact();">Save</button>
                 </div>
             </div>
         </div>
@@ -173,6 +173,8 @@ $userEmail = $_SESSION['email']; // User's email
         if (storedImage) {
             document.getElementById('profilePic').src = storedImage;
         }
+        downloadFromLocalstorage();
+        downloadFromLocalstorage1();
     };
 </script>
 </body>
