@@ -90,10 +90,12 @@ function amount(){
         Button3.style.color = 'black';
         Button2.style.color = 'black';
         Button4.style.color = 'black';
+        return true;
     }
     else{
         Button1.style.background = 'white';
         Button1.style.color = 'black';
+        return false;
     }
 
 }
@@ -108,10 +110,12 @@ function amount1(){
         Button1.style.color = 'black';
         Button3.style.color = 'black';
         Button4.style.color = 'black';
+        return true;
     }
     else{
         Button2.style.background = 'white';
         Button2.style.color = 'black';
+        return false;
     }
 }
 function amount2(){
@@ -125,10 +129,12 @@ function amount2(){
         Button1.style.color = 'black';
         Button2.style.color = 'black';
         Button4.style.color = 'black';
+        return true;
     }
     else{
         Button3.style.background = 'white';
         Button3.style.color = 'black';
+        return false;
     }
 }
 function amount3(){
@@ -142,16 +148,27 @@ function amount3(){
         Button1.style.color = 'black';
         Button2.style.color = 'black';
         Button3.style.color = 'black';
+        return true;
     }
     else{
         Button4.style.background = 'white';
         Button4.style.color = 'black';
+        return false;
     }
 }
 function amount4(){
     var input  = document.getElementById('amount').value;
     Amount  = input;
+    return true;
 }
+
+function selectedAmount(){
+if (amount()){
+    am
+}
+
+}
+
 var Time;
 var times= document.getElementById('OneTime');
 function OneTime(){
@@ -224,17 +241,17 @@ function change(title, description, imageSrc,element) {
 //   FOR the User Profile area**************
 //********************************************* */
 // USer Profile
-const Edit_info= document.getElementById('hidden1');
-  const Edit_About = document.getElementById('hidden');
-  var inp_occupation1= document.getElementById('occupation').value;
-  var inp_location1= document.getElementById('Location').value;
-  var inp_bio1= document.getElementById('bio').value;
+const Edit_info= document.getElementById('contact-details');
+  const Edit_About = document.getElementById('edit-profile-details');
+  var inp_occupation1= document.getElementById('editOccupation').value;
+  var inp_location1= document.getElementById('editLocation').value;
+  var inp_bio1= document.getElementById('editBio').value;
   
 
   // User contact
   var phone= document.getElementById('phone').value;
   var Website= document.getElementById('website').value;
-  var URL = document.getElementById('URL').value;
+  var URL = document.getElementById('linkedIn').value;
 function about_show(){
 if (Edit_About.style.display === 'none') {
     Edit_About.style.display = 'block';
@@ -251,9 +268,9 @@ if (Edit_info.style.display === 'none') {
 }
 function Changeinfo()
 {
-    var inp_occupation= document.getElementById('occupation').value;
-    var inp_location= document.getElementById('Location').value;
-    var inp_bio= document.getElementById('bio').value;
+    var inp_occupation= document.getElementById('editOccupation').value;
+    var inp_location= document.getElementById('editLocation').value;
+    var inp_bio= document.getElementById('editBio').value;
 inp_occupation1= inp_occupation;
 inp_location1= inp_location;
 inp_bio1= inp_bio;
@@ -291,8 +308,8 @@ function downloadFromLocalstorage(){
 function ChangeContact() {
     var phone1 = document.getElementById('phone').value;
     var Website1 = document.getElementById('website').value;
-    var URL1 = document.getElementById('URL').value;
-
+    var URL1 = document.getElementById('linkedIn').value;
+alert('working');
     phone = phone1;
     Website = Website1;
     URL = URL1;

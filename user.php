@@ -23,7 +23,7 @@ $userEmail = $_SESSION['email']; // User's email
 </head>
 <body>
     <div class="user-panel">
-        <!-- Sidebar -->
+
         <aside class="sidebar">
             <h2>User Panel</h2>
             <nav>
@@ -39,26 +39,36 @@ $userEmail = $_SESSION['email']; // User's email
             </nav>
         </aside>
 
-        <!-- Main Content -->
-        <main class="content">
-            <!-- Profile Section -->
-            <section id="profile">
-                <h1>Profile</h1>
-                <div class="profile-header">
-                    <img id="profilePic" src="https://via.placeholder.com/150" alt="User Profile Picture" onclick="document.getElementById('fileInput').click();">
-                    <input type="file" id="fileInput" style="display: none;" onchange="uploadProfilePicture(event)">
-                    <h2><?php echo $userName; ?></h2>
-                    <p><?php echo $userEmail; ?></p>
-                </div>
-                <div class="profile-details">
-                    <div><strong>Occupation:</strong> <span id="Occupation">Software Engineer</span></div>
-                    <div><strong>Location:</strong> <span id="Location1">San Francisco, USA</span></div>
-                    <div><strong>Bio:</strong> <span id="bio1">Passionate about technology and innovation</span></div>
-                    <button class="btn btn-primary" onclick="about_show();">Edit Profile</button>
-                </div>
-            </section>
 
-            <!-- Recent Activity Section -->
+        <main class="content">
+<section id="profile">
+    <h1>Profile</h1>
+    <div class="profile-header">
+        <img id="profilePic" src="https://via.placeholder.com/150" alt="User Profile Picture" onclick="document.getElementById('fileInput').click();">
+        <input type="file" id="fileInput" style="display: none;" onchange="uploadProfilePicture(event)">
+        <h2><?php echo $userName; ?></h2>
+        <p><?php echo $userEmail; ?></p>
+    </div>
+    <div class="profile-details">
+        <div><strong>Occupation:</strong> <span id="Occupation">Software Engineer</span></div>
+        <div><strong>Location:</strong> <span id="Location1">San Francisco, USA</span></div>
+        <div><strong>Bio:</strong> <span id="bio1">Passionate about technology and innovation</span></div>
+        <button class="btn btn-primary btn-outline-dark" onclick="about_show();">Edit Profile</button>
+    </div>
+
+    <div class="edit-profile-details" id="edit-profile-details">
+        <label for="editOccupation">Occupation</label>
+        <input type="text" id="editOccupation" placeholder="Enter your occupation">
+        <label for="editLocation">Location</label>
+        <input type="text" id="editLocation" placeholder="Enter your location">
+        <label for="editBio">Bio</label>
+        <textarea id="editBio" rows="4" placeholder="Write a short bio about yourself"></textarea>
+        <button class="btn btn-outline-dark btn-success" onclick="Changeinfo();">Save</button>
+    </div>
+</section>
+
+
+  
             <section id="recent-activity">
                 <h1>Recent Activity</h1>
                 <div class="card">
@@ -73,20 +83,31 @@ $userEmail = $_SESSION['email']; // User's email
                 </div>
             </section>
 
-            <!-- Contact Information Section -->
-            <section id="contact-information">
-                <h1>Contact Information</h1>
-                <div class="card">
-                    <div class="card-header bg-info text-white">Contact Information</div>
-                    <div class="card-body">
-                        <p><strong>Phone:</strong> <span id="phone1">+1 234 567 890</span></p>
-                        <p><strong>Email:</strong> <?php echo $userEmail; ?></p>
-                        <p><strong>Website:</strong> <span id="website1"><a href="https://johndoe.com" target="_blank">johndoe.com</a></span></p>
-                        <p><strong>LinkedIn:</strong> <span id="URL1"><a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></span></p>
-                        <button class="btn btn-primary" onclick="info_show();">Edit</button>
-                    </div>
-                </div>
-            </section>
+
+<section id="contact-information">
+    <h1>Contact Information</h1>
+    <div class="card">
+        <div class="card-header bg-info text-white">Contact Information</div>
+        <div class="card-body">
+            <p><strong>Phone:</strong> <span id="phone1">+1 234 567 890</span></p>
+            <p><strong>Email:</strong> <?php echo $userEmail; ?></p>
+            <p><strong>Website:</strong> <span id="website1"><a href="https://johndoe.com" target="_blank">johndoe.com</a></span></p>
+            <p><strong>LinkedIn:</strong> <span id="URL1"><a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></span></p>
+            <button class="btn btn-primary  btn-outline-dark" onclick="info_show();">Edit</button>
+        </div>
+        <!-- Editable Contact Information Fields -->  
+        <div class="contact-details" id="contact-details">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" placeholder="Enter new phone number">
+            <label for="website">Website</label>
+            <input type="text" id="website" placeholder="Enter new website URL">
+            <label for="linkedIn">LinkedIn</label>
+            <input type="text" id="linkedIn" placeholder="Enter new LinkedIn URL">
+            <button class="btn btn-success " onclick="ChangeContact();">Save</button>
+        </div>
+    </div>
+</section>
+
         </main>
     </div>
 
