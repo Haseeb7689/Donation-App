@@ -18,6 +18,15 @@ if (isset($_POST['login'])) {
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
+
+                if ($user['role'] == '6f9b7e34-a7c2-4e5f-abc1-d78a94f33b12') {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['name'] = $user['Name']; // Set user's name
+                    $_SESSION['role'] = $user['role'];
+                    echo '<script>alert("To the admin panel")</script>';
+                    echo '<script>window.location.href="Admin.php"</script>';
+                }
                 // Set session variables after successful login
                 $_SESSION['loggedin'] = true;
                 $_SESSION['email'] = $email;
@@ -39,6 +48,9 @@ if (isset($_POST['login'])) {
         }
     }
 }
+
+//18d5ae25-95c4-4336-8637-9ba71b622190 user role
+//6f9b7e34-a7c2-4e5f-abc1-d78a94f33b12 admin role
 ?>
 
 

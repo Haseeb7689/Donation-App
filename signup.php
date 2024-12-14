@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['role'] = $role;
 
             echo "<script>alert('Registration successful.')</script>";
-            echo "<script>window.location='/user.php'</script>"; // Redirect to profile page (or any other page)
+            echo "<script>window.location='/login.php'</script>"; // Redirect to profile page (or any other page)
         } else {
             echo "<script>alert('Registration failed.')</script>";
             echo "<script>window.location='/signup.php'</script>";
