@@ -144,7 +144,7 @@ $userEmail = $_SESSION['email']; // User's email
             if (storedImage) {
                 document.getElementById('profilePic').src = storedImage;
             }
-        };
+        },downloadFromLocalstorage1(),downloadFromLocalstorage();
     </script>
 </body>
 </html>

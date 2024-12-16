@@ -1,78 +1,86 @@
 <?php
 require 'navigation.php';
 
-// Function to initiate JazzCash payment
-function initiateJazzCashPayment($amount, $orderId, $description) {
-  $amount=
-    // JazzCash API credentials
-    $apiUrl = "https://sandbox.jazzcash.com.pk/ApplicationAPI/API/2.0/Purchase/DoMWalletTransaction"; // Use production URL in live mode
-    $merchantId = "MC146119"; // Replace with your Merchant ID
-    $password = "w8sh0z2400"; // Replace with your Password
-    $returnUrl = "http://localhost:8000//DonationSuccess.php"; // Update with your actual return URL
+
+// Function to initiate JazzCash payment (Corrected and improved)
+function initiateJazzCashPayment($amount, $orderId, $description, $mobileNumber) {
+    $apiUrl = "https://sandbox.jazzcash.com.pk/ApplicationAPI/API/2.0/Purchase/DoMWalletTransaction";
+    $merchantId = "MC146119"; // Replace with your actual Merchant ID
+    $password = "w8sh0z2400"; // Replace with your actual Password
+    $returnUrl = "http://yourwebsite.com/donationSuccess.php"; // Replace with your actual return URL
     $timestamp = date('YmdHis');
     $txnRefNo = "T" . $timestamp;
+    $amountInPaisa = $amount * 250; // Amount must be in paisa
 
-    // Secure hash generation
-    $secureHashData = $merchantId . "&" . $password . "&" . $txnRefNo . "&" . ($amount * 100) . "&" . $password;
-    $secureHash = hash_hmac('sha256', $secureHashData, $password);
+    // Correct Secure Hash Calculation (Crucial!)
+    $integritySalt = $password; // Use password as integrity salt
+    $pp_SecureHash = hash_hmac('sha256', $merchantId . '&' . $password . '&' . $txnRefNo . '&' . $amountInPaisa . '&' . $integritySalt, $integritySalt);
 
-    // JazzCash API payload
     $payload = [
         "pp_Version" => "2.0",
         "pp_TxnType" => "MWALLET",
         "pp_Language" => "EN",
         "pp_MerchantID" => $merchantId,
-        "pp_SubMerchantID" => "",
+        "pp_MobileNumber" => $mobileNumber,
         "pp_Password" => $password,
         "pp_TxnRefNo" => $txnRefNo,
-        "pp_Amount" => $amount * 100, // Amount in paisa
+        "pp_Amount" => $amountInPaisa, // Amount in paisa
         "pp_TxnCurrency" => "PKR",
         "pp_TxnDateTime" => $timestamp,
         "pp_BillReference" => $orderId,
         "pp_Description" => $description,
         "pp_TxnExpiryDateTime" => date('YmdHis', strtotime('+1 hour')),
         "pp_ReturnURL" => $returnUrl,
-        "pp_SecureHash" => $secureHash
+        "pp_SecureHash" => $pp_SecureHash,
     ];
 
-    // Make API request via cURL
     $ch = curl_init($apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/x-www-form-urlencoded'
-    ]);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $error = curl_error($ch); // Capture cURL errors
     curl_close($ch);
 
     if ($httpCode == 200) {
-        return json_decode($response, true);
+        $decodedResponse = json_decode($response, true);
+        if (isset($decodedResponse['pp_ResponseCode']) && $decodedResponse['pp_ResponseCode'] == '000') {
+            return ["success" => true, "redirectUrl" => $decodedResponse['pp_RedirectionURL']];
+        } else {
+            return ["success" => false, "error" => $decodedResponse['pp_ResponseMessage'] ?? 'JazzCash API Error', "details" => $decodedResponse];
+        }
     } else {
-        return [
-            "error" => "Failed to initiate payment",
-            "httpCode" => $httpCode,
-            "response" => $response
-        ];
+        return ["success" => false, "error" => "cURL Error: " . $error . " (HTTP code: $httpCode)", "response" => $response];
     }
 }
 
-// Handle the form submission for initiating payment
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['donationAmount'])) {
-    $donationAmount = $_POST['donationAmount'];
-    $response = initiateJazzCashPayment($donationAmount, "ORDER12345", "Donation Payment");
+// Handle JSON POST request for JazzCash
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/json') {
+    header('Content-Type: application/json');
+    $jsonPayload = file_get_contents('php://input');
+    $decodedData = json_decode($jsonPayload, true);
 
-    if (isset($response['pp_ResponseCode']) && $response['pp_ResponseCode'] == '000') {
-        header("Location: " . $response['pp_RedirectionURL']); // Redirect to JazzCash payment page
-        exit;
+    if (isset($decodedData['donationAmount'], $decodedData['mobile'], $decodedData['cnic'])) {
+        $donationAmount = floatval($decodedData['donationAmount']); // Important: Sanitize and convert to float
+        $mobileNumber = $decodedData['mobile'];
+        $cnic = str_replace('-', '', $decodedData['cnic']);
+
+        $response = initiateJazzCashPayment($donationAmount, "ORDER" . time(), "Donation Payment", $mobileNumber, $cnic); // Unique order ID
+
+        if ($response['success']) {
+            echo json_encode(["status" => "success", "redirectURL" => $response['redirectUrl']]);
+        } else {
+            echo json_encode(["status" => "error", "message" => $response['error'], "details" => $response['details']]);
+        }
     } else {
-        echo "Error initiating payment: " . ($response['pp_ResponseMessage'] ?? 'Unknown error');
+        echo json_encode(["status" => "error", "message" => "Missing parameters (donationAmount, mobile, cnic)."]);
     }
+    exit;
 }
 ?>
-
 
 
 <!DOCTYPE html>
@@ -138,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['donationAmount'])) {
           <button value="75"  id="75$" onclick="amount1();">75$</button>
           <button  value="50" id="50$" onclick="amount2();">50$</button>
           <button  value="25" id="25$" onclick="amount3();">25$</button>
-          <input type="number" id="other" placeholder="Other amount" id="amount" name="amount" onchange="amount4();"/>
+          <input type="number"  placeholder="Other amount" id="amount" name="amount" onchange="amount4();"/>
         </div>
         <label>Note: 10$ is the minimum for online donation</label>
       </div>
@@ -227,9 +235,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['donationAmount'])) {
         <button >Payment detail</button>
       </div>
       <div class="wallet">
-        <label> Enter Your jazzcash number</label>
-        <input type="text" id="jazzcash" >
-        <input type="submit" value="Submit" onclick="initiateJazzCashPayment();">
+      <label>Enter Your JazzCash Mobile Number:</label>
+      <input type="text" id="jazzcash" placeholder="Your JazzCash Mobile Number" onchange="payment();"/>
+      <label>Enter Your CNIC:</label>
+      <input type="text" id="cnic" placeholder="Your CNIC Number" onchange="payment();"/>
+      <input type="submit" value="Submit" onclick="selectedAmount();" />
         <h1>Online Transfer</h1>
         <p>Make your donation by sending it to the following wallet address</p>
         <div class="wallet-address">

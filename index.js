@@ -139,6 +139,7 @@ function amount2(){
 }
 function amount3(){
     Amount=25;
+    console.log(Amount);
     if(Button4.style.background === 'white' || Button4.style.background === '') {
         Button1.style.background = 'white';
         Button2.style.background = 'white';
@@ -155,18 +156,55 @@ function amount3(){
         Button4.style.color = 'black';
         return false;
     }
+
 }
 function amount4(){
     var input  = document.getElementById('amount').value;
     Amount  = input;
     return true;
 }
-
-function selectedAmount(){
-if (amount()){
-    am
+var Mobile;
+var Cnic
+function payment(){
+    var mobile = document.getElementById('jazzcash').value;
+Mobile=mobile;
+var cnic = document.getElementById('cnic').value;
+Cnic= cnic;
+console.log(mobile);
+console.log(Cnic);    
 }
+function selectedAmount() {
+    console.log(Amount);
+    console.log(Cnic);
+    console.log(Mobile);
+    alert('You have selected ' + Amount + '$');
 
+    fetch('Donation.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ donationAmount: Amount, mobile: Mobile, cnic: Cnic })
+    })
+    .then(response => {
+        if (!response.ok) { // Check for HTTP errors (4xx, 5xx)
+            return response.json().then(err => {throw new Error(err.message)}); //Throw error with message
+        }
+        return response.json()
+    })
+    .then(data => {
+        console.log(data);
+        if (data.status === "success") {
+            window.location.href = data.redirectURL; // Redirect on success
+        } else {
+            alert("Payment Error: " + data.message); // Display error message to the user
+            console.error("Payment Details:", data.details); // Log details for debugging
+        }
+    })
+    .catch(error => {
+        console.error("Fetch Error:", error); // Handle network or parsing errors
+        alert("An error occurred during payment processing. Please try again later.");
+    });
 }
 
 var Time;
