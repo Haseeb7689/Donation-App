@@ -632,3 +632,49 @@ transform: scale(0.6);
     color: #333;
     margin-bottom: 15px;
   }
+  .payment-form {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto; /* Center the form horizontally */
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .payment-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+  }
+  
+  .payment-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Green button */
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .payment-form input[type="submit"]:hover {
+    background-color: #218838; /* Darker green */
+  }
+  

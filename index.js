@@ -22,8 +22,10 @@ if (MyPayment.style.display === 'none') {
 }
 }
 var Card = document.getElementById('details');
-
-function popup1(){
+var payment_type;
+function popup1()
+{
+    payment_type = "Card";
 if(Card.style.display === 'none'){
     Card.style.display = 'block';
     MyPayment.style.display = 'none';
@@ -55,6 +57,7 @@ if(wrapper.style.display === 'none'){
 
 
 function popup2(){
+    payment_type = "Online";
 if (online.style.display === 'none') {
     online.style.display = 'flex';
     MyPayment.style.display = 'none';
@@ -164,7 +167,7 @@ function amount4(){
     return true;
 }
 var Mobile;
-var Cnic
+var Cnic;
 function payment(){
     var mobile = document.getElementById('jazzcash').value;
 Mobile=mobile;
@@ -173,59 +176,131 @@ Cnic= cnic;
 console.log(mobile);
 console.log(Cnic);    
 }
+var gift = "NO";
+function Gift(){
+    gift = "YES";
+    return true;
+}
+var support;
+function Support(){
+    const SelectedElement = document.querySelector("select");
+    const selectedValue = SelectedElement.value;
+    
+    console.log(selectedValue);
+    switch (selectedValue) {
+        case "Disaster Relief":
+            support = "Disaster Relief";
+            break;
+         
+        case "Education":
+            support = "Education";
+            break;
+        case "Health":
+            support = "Healthcare";
+            break;  
+         case "Hunger":
+            support = "hunger";
+            break;
+         case "Water":
+            support = "water";
+            break;
+         case "Child":
+            support = "Child";
+            break;
+        case "Shelter":
+            support = "Shelter";
+            break;    
+        default:
+            break;
+    }
+}
+let isData = false;
+
 function selectedAmount() {
-    console.log(Amount);
-    console.log(Cnic);
-    console.log(Mobile);
+    Support();
+    if (isData) {
+        alert("You have already submitted the data.");
+        return;
+    }
+
+    if (Gift()) {
+        Amount += 1.8; // Adjust amount if gift is selected
+    }
+
+    isData = true;
     alert('You have selected ' + Amount + '$');
 
-    fetch('Donation.php', {
+    // Prepare the data to be sent to the backend
+    const data = {
+        donationAmount: Amount,
+        mobile: Mobile,
+        cnic: Cnic,
+        gift: gift,
+        support: support,
+        payment_type: payment_type,
+        recurring: Time,
+    };
+    console.log(data);
+    alert("values");
+    fetch('Donation-ins.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ donationAmount: Amount, mobile: Mobile, cnic: Cnic })
+        body: JSON.stringify(data),
     })
-    .then(response => {
-        if (!response.ok) { // Check for HTTP errors (4xx, 5xx)
-            return response.json().then(err => {throw new Error(err.message)}); //Throw error with message
-        }
-        return response.json()
-    })
-    .then(data => {
-        console.log(data);
-        if (data.status === "success") {
-            window.location.href = data.redirectURL; // Redirect on success
-        } else {
-            alert("Payment Error: " + data.message); // Display error message to the user
-            console.error("Payment Details:", data.details); // Log details for debugging
-        }
-    })
-    .catch(error => {
-        console.error("Fetch Error:", error); // Handle network or parsing errors
-        alert("An error occurred during payment processing. Please try again later.");
-    });
+        .then(response => {
+            console.log("Response Status:", response.status);
+            alert("Error: " + data.message);
+            if (!response.ok) {
+                return response.json().then(err => {
+                    console.error("Server Error:", err);
+                    throw new Error(err.message);
+                    alert("Error: " + data.message);
+                });
+            }
+            alert("Error: " + response.json());
+            return response.json();
+        })
+        .then(data => {
+            console.log("Server Response:", data);
+            if (data.status === "success") {
+                alert("Donation Successful!");
+                window.location.href = 'Donation.php';
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error during fetch:", error);
+            alert("An error occurred while submitting the data. Please try again later.");
+        });
+    
 }
+
 
 var Time;
 var times= document.getElementById('OneTime');
 function OneTime(){
     
-Time = times.innerHTML;
+Time = "one time";
 if (times.style.background === 'white' || times.style.background === '') {
     times.style.background = 'cornflowerblue';
     times.style.color = 'white';
     recurring.style.background = 'white';
     recurring.style.color = 'black';
+    return true;
 }
 else{
+    
     times.style.background = 'white';
     times.style.color = 'black';
+    return false;
 }
 } var recurring= document.getElementById('Monthly');
 function Monthly(){
    
-Time = recurring.innerHTML;
+Time = "recurring";
 if (recurring.style.background === 'white' || times.style.background === '') {
     recurring.style.background = 'cornflowerblue';
     recurring.style.color = 'white';
