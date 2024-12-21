@@ -309,7 +309,7 @@ require 'navigation.php';
             lasting change. Thank you for making a difference
           </p>
           <button>Donate</button>
-          <button>Supplies</button>
+          <button><a href="Shop.php">Supplies</a></button>
         </div>
         <div class="Donation-image">
           <img src="img/donation.jpg" alt="" />

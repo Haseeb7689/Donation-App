@@ -97,13 +97,13 @@ body {
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-
+/* 
 main {
   display: flex;
   justify-content: space-between;
   background-color: #f6dfdf;
   height: 100vh;
-}
+} */
 
 .content {
   margin: 80px 0px 0px 100px;

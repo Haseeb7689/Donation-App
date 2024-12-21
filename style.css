@@ -544,6 +544,13 @@ main {
   background-position: right bottom;
   transition: background-position 0.5s ease, color 0.5s ease;
 }
+.Donation-description a{
+  color:white;
+  text-decoration: none;
+}
+.Donation-description a:hover{
+  color: rgb(210, 21, 21);
+}
 .donation2 button:nth-child(3):hover,
 .Donation-description button:nth-child(4):hover {
   cursor: pointer;
