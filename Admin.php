@@ -1,6 +1,44 @@
 <?php
+session_start();
+require 'config.php';
 
+// Check if the user is logged in
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]) {
+    header('Location: login.php');
+    exit;
+}
 
+// Admin role
+$role = '6f9b7e34-a7c2-4e5f-abc1-d78a94f33b12';
+
+if ($_SESSION['role'] === $role) {
+    $userName = $_SESSION['name'];
+
+    try {
+        // Query to count total users
+        $userCountQuery = 'SELECT COUNT(*) AS total_users FROM donate';
+        $userStmt = $connection->query($userCountQuery);
+        $userResult = $userStmt->fetch(PDO::FETCH_ASSOC);
+        $totalUsers = $userResult['total_users'];
+
+        // Query to calculate total donations
+        $donationSumQuery = 'SELECT SUM(amount) AS total_donations FROM donate';
+        $donationStmt = $connection->query($donationSumQuery);
+        $donationResult = $donationStmt->fetch(PDO::FETCH_ASSOC);
+        $totalDonations = $donationResult['total_donations'];
+
+    } catch (PDOException $e) {
+        echo "<script>alert('Database Error: " . $e->getMessage() . "')</script>";
+        $totalUsers = 0;
+        $totalDonations = 0;
+    }
+
+} else {
+    header("HTTP/1.1 403 Forbidden");
+    echo "<h1>403 Forbidden</h1>";
+    echo "<p>You do not have permission to access this page.</p>";
+    exit;
+}
 ?>
 
 
@@ -15,13 +53,14 @@
   <body>
     <div class="admin-panel">
       <aside class="sidebar">
-        <h2>Admin Panel</h2>
+        <h2>Admin Panel: <?php echo $userName ?></h2>
+     
         <nav>
           <ul>
             <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#user-management">User Management</a></li>
             <li><a href="#campaign-management">Campaign Management</a></li>
-            <li><a href="#donation-management">Donation Management</a></li>
+            <li><a href="/donationmanagement.php">Donation Management</a></li>
             <li><a href="#content-management">Content Management</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="index.php">Homepage</a></li>
@@ -31,16 +70,16 @@
       </aside>
 
       <main class="content">
-        <section id="dashboard">
-          <h1>Dashboard</h1>
-          <div class="stats">
-            <div>Total Donations: $<span id="total-donations">0</span></div>
-            <div>Total Donors: <span id="total-donors">0</span></div>
-            <div>Active Campaigns: <span id="active-campaigns">0</span></div>
-            <div>Recent Donations:</div>
-            <ul id="recent-donations"></ul>
-          </div>
-        </section>
+      <section id="dashboard">
+  <h1>Dashboard</h1>
+  <div class="stats">
+    <div>Total Donations: $<span id="total-donations"><?php echo number_format($totalDonations, 2); ?></span></div>
+    <div>Total Donors: <span id="total-donors"><?php echo $totalUsers; ?></span></div>
+    <div>Active Campaigns: <span id="active-campaigns">8</span></div>
+    <div>Recent Donations:</div>
+    <ul id="recent-donations"></ul>
+  </div>
+</section>
 
         <section id="user-management">
           <h1>User Management</h1>

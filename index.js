@@ -176,10 +176,22 @@ Cnic= cnic;
 console.log(mobile);
 console.log(Cnic);    
 }
-var gift = "NO";
+var gift = document.getElementById('gift');
 function Gift(){
-    gift = "YES";
-    return true;
+    let Gift = gift;
+if (Gift.checked){
+    Gift.value="Yes";
+    gift=Gift;
+    console.log('Gift Value'+ Gift.value);
+    return  true;
+}
+else{
+    Gift.value="No";
+    gift=Gift;
+    console.log('Gift Value'+ Gift.value);
+    return false;
+}
+
 }
 var support;
 function Support(){
@@ -195,7 +207,7 @@ function Support(){
         case "Education":
             support = "Education";
             break;
-        case "Health":
+        case "Healthcare":
             support = "Healthcare";
             break;  
          case "Hunger":
@@ -213,71 +225,69 @@ function Support(){
         default:
             break;
     }
-}
-let isData = false;
+}let isData = false;
 
-function selectedAmount() {
-    Support();
-    if (isData) {
-        alert("You have already submitted the data.");
-        return;
-    }
+async function selectedAmount() {
+    try {
+        Support();
+        alert(support);
+        if (isData) {
+            alert("You have already submitted the data.");
+            return;
+        }
 
-    if (Gift()) {
-        Amount += 1.8; // Adjust amount if gift is selected
-    }
+        if (Gift()) {
+            Amount += 1.8;
+           
+          // Adjust amount if gift is selected
+        }
+       
+        isData = true;
 
-    isData = true;
-    alert('You have selected ' + Amount + '$');
+        // Prepare the data to be sent to the backend
+        const data = {
+            donationAmount: Amount,
+            mobile: Mobile,
+            cnic: Cnic,
+            gift: gift.value,
+            support: support,
+            payment_type: payment_type,
+            recurring: Time,
+        };
 
-    // Prepare the data to be sent to the backend
-    const data = {
-        donationAmount: Amount,
-        mobile: Mobile,
-        cnic: Cnic,
-        gift: gift,
-        support: support,
-        payment_type: payment_type,
-        recurring: Time,
-    };
-    console.log(data);
-    alert("values");
-    fetch('Donation-ins.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-        .then(response => {
-            console.log("Response Status:", response.status);
-            alert("Error: " + data.message);
-            if (!response.ok) {
-                return response.json().then(err => {
-                    console.error("Server Error:", err);
-                    throw new Error(err.message);
-                    alert("Error: " + data.message);
-                });
-            }
-            alert("Error: " + response.json());
-            return response.json();
-        })
-        .then(data => {
-            console.log("Server Response:", data);
-            if (data.status === "success") {
-                alert("Donation Successful!");
-                window.location.href = 'Donation.php';
-            } else {
-                alert("Error: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error during fetch:", error);
-            alert("An error occurred while submitting the data. Please try again later.");
+        console.log("Sending Data:", data);
+
+        const response = await fetch('Donation-ins.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         });
-    
-}
 
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            console.error("Server Error:", responseData);
+            alert("Error: " + (responseData.message || "An error occurred on the server."));
+            return;
+        }
+
+        console.log("Server Response:", responseData);
+
+        if (responseData.status === "success") {
+            alert("Donation Successful!");
+            window.location.href = 'Donation.php';
+        } else {
+            alert("Error: " + (responseData.message || "Something went wrong."));
+        }
+    } catch (error) {
+        console.error("Error during fetch:", error);
+        alert("Entered");
+    } finally {
+        isData = false; 
+    }
+}
 
 var Time;
 var times= document.getElementById('OneTime');
