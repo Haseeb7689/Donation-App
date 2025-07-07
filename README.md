@@ -93,7 +93,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 For any queries or feedback, please contact:
 
 - **Author**: Haseeb and Abdur rehman Abid
-- **Email**: [abidmani790@gmail.com](mailto:abidmani790@gmail.com)  
+- **Email**: [abidmani790@gmail.com](mailto:abidmani790@gmail.com) [raoh2651@gmail.com](mailto:raoh2651@gmail.com)
 - **GitHub**: [Haseeb7689](https://github.com/Haseeb7689) and [Abdurrehamn211](https://github.com/Abdurrehman211)
 
 - Special Thanks to **[Triodevelopers.com](https://abdurrehman-portfolio-121.netlify.app/)** For this App.
